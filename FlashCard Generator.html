@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #flashcards {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Flashcard Generator</h1>
+        <textarea id="learningObjective" placeholder="Enter your learning objective here..."></textarea>
+        <button onclick="generateFlashcards()">Generate Flashcards</button>
+        <div id="flashcards"></div>
+    </div>
+    <script>
+        async function generateFlashcards() {
+            const learningObjective = document.getElementById('learningObjective').value;
+            const flashcardsContainer = document.getElementById('flashcards');
+
+            flashcardsContainer.innerHTML = '<p>Generating flashcards...</p>';
+
+            // Send the learning objective to the Flashcard Generator (simulated with a placeholder function here)
+            const flashcards = await getFlashcardsFromGPT(learningObjective);
+
+            flashcardsContainer.innerHTML = '';
+
+            flashcards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.style.border = '1px solid #ddd';
+                cardElement.style.padding = '10px';
+                cardElement.style.marginBottom = '10px';
+                cardElement.innerHTML = `<strong>Q:</strong> ${card.question}<br><strong>A:</strong> ${card.answer}`;
+                flashcardsContainer.appendChild(cardElement);
+            });
+        }
+
+        // Placeholder function to simulate interaction with GPT
+        async function getFlashcardsFromGPT(learningObjective) {
+            // Simulate a delay for API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Simulated flashcards output
+            return [
+                { question: 'What is the main concept of this objective?', answer: 'The main concept is...' },
+                { question: 'How does this concept apply to real-world scenarios?', answer: 'In real-world scenarios...' }
+            ];
+        }
+    </script>
+</body>
+</html>
